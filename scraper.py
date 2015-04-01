@@ -30,7 +30,7 @@
 import itertools as it
 import json
 import scraperwiki
-import pandas as pd
+import pandas
 
 # <codecell>
 
@@ -43,7 +43,7 @@ def ExtractPlayerDF(Data):
     colNames = ['Date', 'Round', 'Opponent', 'MP', 'GS', 'A', 'CS', 'GC', 'OG', 'PS',
                 'PM', 'YC', 'RC', 'S', 'B', 'ESP', 'BPS', 'NT', 'Value', 'Points']
     fixtures = Data['fixture_history']['all']
-    playerDF = pd.DataFrame(fixtures, columns = colNames)
+    playerDF = pandas.DataFrame(fixtures, columns = colNames)
 
     playerDF['ID'] = Data['id']
     playerDF['Code'] = Data['code']
@@ -77,7 +77,7 @@ for i in it.count(1):
 
 ## Mine Players Data
 ## and concat all into one DataFrame
-PlayersData = pd.concat(map(ExtractPlayerDF, playersDataRaw), ignore_index = True)
+PlayersData = pandas.concat(map(ExtractPlayerDF, playersDataRaw), ignore_index = True)
 
 # <codecell>
 
