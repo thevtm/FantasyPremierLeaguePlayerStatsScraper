@@ -64,13 +64,13 @@ def ExtractPlayerDF(Data):
 ## Download data
 playersDataRaw = []
 
-for i in it.count(1):
+for i in it.count(1):    
     url = PLAYER_DATA_URL + str(i)
     try:
         playerDataJson = scraperwiki.scrape(url)
         playersDataRaw.append(json.loads(playerDataJson))
     except:
-        print 'Last Player Index evaluated: ' + str(i)
+        print '[LOG] Last Player Index evaluated: ' + str(i)
         break
 
 # <codecell>
