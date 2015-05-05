@@ -62,26 +62,38 @@ def ExtractPlayerDF(Data):
 # <codecell>
 
 ## Download data
-playersDataRaw = []
+print '[LOG] Downloading Data Started'
 
+playersDataRaw = []
 for i in it.count(1):    
     url = PLAYER_DATA_URL + str(i)
     try:
         playerDataJson = scraperwiki.scrape(url)
         playersDataRaw.append(json.loads(playerDataJson))
+        print '[LOG] Player Index ', i, ' data downloaded successfully.'
     except:
-        print '[LOG] Last Player Index evaluated: ' + str(i)
+        print '[LOG] Last Player Index downloaded: ' + str(i)
         break
+
+print '[LOG] Downloading Data Ended'
 
 # <codecell>
 
 ## Mine Players Data
 ## and concat all into one DataFrame
+
+print '[LOG] Processing Data Started'
+
 PlayersData = pandas.concat(map(ExtractPlayerDF, playersDataRaw), ignore_index = True)
+
+print '[LOG] Processing Data Ended'
 
 # <codecell>
 
 ## Save DataFrame to SQLite
+
+print '[LOG] Transfering data to SQLite format'
+
 scraperwiki.sqlite.save(unique_keys = [],
                         data = PlayersData.to_dict(outtype = 'records'),
                         table_name = 'data')
