@@ -65,7 +65,7 @@ def ExtractPlayerDF(Data):
 print '[LOG] Downloading Data Started'
 
 playersDataRaw = []
-for i in range(1, 10):#it.count(1):
+for i in it.count(1):
     url = PLAYER_DATA_URL + str(i)
     try:
         playerDataJson = scraperwiki.scrape(url)
