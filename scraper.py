@@ -65,7 +65,7 @@ def ExtractPlayerDF(Data):
 print '[LOG] Downloading Data Started'
 
 playersDataRaw = []
-for i in it.count(1):
+for i in range(1, 10):#it.count(1):
     url = PLAYER_DATA_URL + str(i)
     try:
         playerDataJson = scraperwiki.scrape(url)
@@ -94,11 +94,8 @@ print '[LOG] Processing Data Ended'
 
 print '[LOG] Transfering data to SQLite format'
 
-map(lambda x: scraperwiki.sqlite.save(unique_keys = ['Code', 'Round'], data = x),
-    PlayersData.to_dict(orient = 'records'))
+scraperwiki.sqlite.save(unique_keys = ['Code', 'Round'],
+                        data = PlayersData.to_dict(orient = 'records'))
 
 
-
-
-
-
+print scraperwiki.sqlite.show_tables()
