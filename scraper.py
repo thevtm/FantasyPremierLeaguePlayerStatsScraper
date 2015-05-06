@@ -94,10 +94,11 @@ print '[LOG] Processing Data Ended'
 
 print '[LOG] Transfering data to SQLite format'
 
-scraperwiki.sqlite.save(unique_keys = ['Code', 'Round'],
-                        data = PlayersData.to_dict(orient = 'records'))
+map(lambda x: scraperwiki.sqlite.save(unique_keys = ['Code', 'Round'], data = x),
+    PlayersData.to_dict(orient = 'records'))
 
-scraperwiki.sqlite.commit()
+
+
 
 
 
